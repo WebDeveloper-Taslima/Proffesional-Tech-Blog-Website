@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataPulse - Data Technology Insights & Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-blue: #1A365D;
+            --secondary-teal: #319795;
+            --accent-amber: #FFB74D;
+            --neutral-light: #F7FAFC;
+            --neutral-dark: #2D3748;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Lato', sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--neutral-dark);
+            background-color: var(--neutral-light);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        /* Header Styles */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-blue) !important;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--neutral-dark) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--secondary-teal) !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-blue);
+            border-color: var(--primary-blue);
+            font-weight: 500;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #152a47;
+            border-color: #152a47;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-teal);
+            border-color: var(--secondary-teal);
+            color: white;
+            font-weight: 500;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2c7a7b;
+            border-color: #2c7a7b;
+        }
+        
+        .btn-accent {
+            background-color: var(--accent-amber);
+            border-color: var(--accent-amber);
+            color: var(--neutral-dark);
+            font-weight: 500;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e6a642;
+            border-color: #e6a642;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(26, 54, 93, 0.6), rgba(49, 151, 149, 0.9)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover;
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Card Styles */
+        .card {
+            border: none;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .card-text {
+            color: #4a5568;
+            margin-bottom: 1rem;
+        }
+        
+        .meta-info {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+        
+        .meta-info i {
+            margin-right: 0.5rem;
+        }
+        
+        .meta-info span {
+            margin-right: 1rem;
+        }
+        
+        /* Service Cards */
+        .service-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--secondary-teal);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Vendor Carousel */
+        .vendor-logo {
+            height: 80px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+        
+        .vendor-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        /* Email Signup */
+        .email-signup {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 3rem;
+            border-radius: 8px;
+        }
+        
+        .email-signup h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .email-signup p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .form-control {
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem 1rem;
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary-teal);
+            box-shadow: 0 0 0 0.2rem rgba(49, 151, 149, 0.25);
+        }
+        
+        /* Login Form */
+        .login-container {
+            max-width: 450px;
+            margin: 5rem auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .login-header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .login-body {
+            padding: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .security-badge {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+        
+        .security-badge i {
+            color: var(--secondary-teal);
+            margin-right: 0.5rem;
+        }
+        
+        /* Ad Banners */
+        .ad-banner {
+            background-color: #edf2f7;
+            border: 1px dashed #cbd5e0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #718096;
+            font-size: 0.9rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .ad-banner.top {
+            height: 90px;
+        }
+        
+        .ad-banner.sidebar {
+            height: 250px;
+        }
+        
+        .ad-banner.content {
+            height: 60px;
+        }
+        
+        .ad-banner.footer {
+            height: 90px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        footer h5 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        footer ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        footer a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">DataPulse</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="services.html">Technology</a></li>
+                            <li><a class="dropdown-item" href="services.html">Consulting</a></li>
+                            <li><a class="dropdown-item" href="services.html">Events</a></li>
+                            <li><a class="dropdown-item" href="services.html">Training</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="vendors.html">Partners</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Members</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="consultant-register.html">Join as Consultant</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Empowering Data Professionals Worldwide</h1>
+            <p>Cutting-edge insights, expert consulting, and specialized training for the data-driven future</p>
+            <div class="hero-buttons">
+                <a href="blog.html" class="btn btn-light btn-lg">Explore Insights</a>
+                <a href="services.html" class="btn btn-outline-light btn-lg">Our Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Posts Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Latest Data Insights</h2>
+                <p>Stay updated with the latest trends, technologies, and best practices in data science</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Data visualization">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-primary">Big Data</span>
+                                <span class="text-muted">5 min read</span>
+                            </div>
+                            <h5 class="card-title">The Future of Real-Time Analytics</h5>
+                            <p class="card-text">Exploring how real-time data processing is transforming business intelligence and decision-making.</p>
+                            <div class="meta-info">
+                                <span><i class="bi bi-person-circle"></i> Sarah Johnson</span>
+                                <span><i class="bi bi-calendar3"></i> Oct 15, 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Cloud computing">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-success">Cloud</span>
+                                <span class="text-muted">8 min read</span>
+                            </div>
+                            <h5 class="card-title">Cloud Data Warehousing Best Practices</h5>
+                            <p class="card-text">Key strategies for implementing scalable and cost-effective cloud data warehouse solutions.</p>
+                            <div class="meta-info">
+                                <span><i class="bi bi-person-circle"></i> Michael Chen</span>
+                                <span><i class="bi bi-calendar3"></i> Oct 12, 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="AI and machine learning">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-warning text-dark">AI/ML</span>
+                                <span class="text-muted">12 min read</span>
+                            </div>
+                            <h5 class="card-title">Ethical Considerations in AI Development</h5>
+                            <p class="card-text">Navigating the ethical challenges and responsibilities in developing AI and machine learning systems.</p>
+                            <div class="meta-info">
+                                <span><i class="bi bi-person-circle"></i> Dr. Emily Rodriguez</span>
+                                <span><i class="bi bi-calendar3"></i> Oct 10, 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="blog.html" class="btn btn-primary">View All Insights</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Preview Section -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Comprehensive solutions for your data technology needs</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-cpu"></i>
+                        </div>
+                        <h4>Technology</h4>
+                        <p>Cutting-edge data platforms and tools to power your analytics infrastructure</p>
+                        <a href="services.html" class="btn btn-sm btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h4>Consulting</h4>
+                        <p>Expert guidance to optimize your data strategy and implementation</p>
+                        <a href="services.html" class="btn btn-sm btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-calendar-event"></i>
+                        </div>
+                        <h4>Events</h4>
+                        <p>Industry conferences, webinars, and networking opportunities</p>
+                        <a href="services.html" class="btn btn-sm btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-mortarboard"></i>
+                        </div>
+                        <h4>Training</h4>
+                        <p>Specialized courses and certifications for data professionals</p>
+                        <a href="services.html" class="btn btn-sm btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vendor Spotlight Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Trusted Technology Partners</h2>
+                <p>Industry-leading vendors providing innovative data solutions</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-6 col-md-3 mb-4">
+                    <div class="d-flex justify-content-center align-items-center h-100">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" class="vendor-logo">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 mb-4">
+                    <div class="d-flex justify-content-center align-items-center h-100">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" class="vendor-logo">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 mb-4">
+                    <div class="d-flex justify-content-center align-items-center h-100">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" class="vendor-logo">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 mb-4">
+                    <div class="d-flex justify-content-center align-items-center h-100">
+                        <img src="https://cdn.pixabay.com/photo/2013/02/12/09/07/microsoft-80658_1280.png" alt="Microsoft" class="vendor-logo">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 mb-4">
+                    <div class="d-flex justify-content-center align-items-center h-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStEfXoYgZrbe4-wv8--meU0pFFqbs2-TYH_A&s" alt="Oracle" class="vendor-logo">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 mb-4">
+                    <div class="d-flex justify-content-center align-items-center h-100">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/SAP-Logo.svg/2560px-SAP-Logo.svg.png" alt="SAP" class="vendor-logo">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 mb-4">
+                    <div class="d-flex justify-content-center align-items-center h-100">
+                        <img src="https://images.ctfassets.net/lzny33ho1g45/salesforce-tutorial-p-img/27e1150e679de78f6ac7a6b4cbdb2033/file.png?fm=jpg&q=31&fit=thumb&w=1520&h=760" alt="Salesforce" class="vendor-logo">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 mb-4">
+                    <div class="d-flex justify-content-center align-items-center h-100">
+                        <img src="https://www.liverpool.ac.uk/media/livacuk/computingservices/business-intelligence/Tableau-Logo.png" alt="Tableau" class="vendor-logo">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="vendors.html" class="btn btn-secondary">View All Partners</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Signup Section -->
+    <section class="section">
+        <div class="container">
+            <div class="email-signup">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h3>Stay Updated with Data Insights</h3>
+                        <p>Subscribe to our weekly newsletter for the latest trends, research, and expert analysis in data technology.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <form>
+                            <div class="input-group mb-3">
+                                <input type="email" class="form-control" placeholder="Your email address" required>
+                                <button class="btn btn-accent" type="submit">Subscribe</button>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="privacyCheck" required>
+                                <label class="form-check-label" for="privacyCheck">
+                                    I agree to the privacy policy and terms of service
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>DataPulse</h5>
+                    <p>Empowering data professionals worldwide with cutting-edge insights, expert consulting, and specialized training.</p>
+                </div>
+                <div class="col-md-2">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="vendors.html">Partners</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h5>Services</h5>
+                    <ul>
+                        <li><a href="services.html">Technology</a></li>
+                        <li><a href="services.html">Consulting</a></li>
+                        <li><a href="services.html">Events</a></li>
+                        <li><a href="services.html">Training</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h5>Resources</h5>
+                    <ul>
+                        <li><a href="#">Whitepapers</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Webinars</a></li>
+                        <li><a href="#">Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h5>Connect</h5>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Partnerships</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 DataPulse. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
